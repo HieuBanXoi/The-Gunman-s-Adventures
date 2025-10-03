@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class CoreMonoBehaviour : MonoBehaviour
 {
     protected virtual void Awake()
@@ -15,7 +15,7 @@ public class CoreMonoBehaviour : MonoBehaviour
     protected virtual void Reset()
     {
         this.LoadComponents();
-        this.ResetValue();
+        //this.ResetValue();
     }
 
     protected virtual void LoadComponents()
