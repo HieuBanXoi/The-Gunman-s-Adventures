@@ -15,7 +15,7 @@ public class DespawnByDistance : Despawn
     protected virtual void LoadCamera()
     {
         if (this.mainCam != null) return;
-        this.mainCam = Transform.FindAnyObjectByType<CinemachineCamera>().transform;
+        this.mainCam = GameCtrl.Instance.MainCamera.transform;
     }
     protected override bool CanDespawn()
     {
