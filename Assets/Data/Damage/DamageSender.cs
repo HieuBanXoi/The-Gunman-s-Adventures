@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageSender : CoreMonoBehaviour
 {
-    [SerializeField] protected float damage = 10;
+    [SerializeField] protected int damage = 10;
     public virtual void Send(Transform obj)
         {
             DamageReceiver damageReceiver = obj.GetComponentInChildren<DamageReceiver>();
@@ -12,11 +12,6 @@ public class DamageSender : CoreMonoBehaviour
     public virtual void Send(DamageReceiver damageReceiver)
     {
         if (damageReceiver == null) return;
-        damageReceiver.Take(damage);
-        DestroyObject();
-    }
-    protected virtual void DestroyObject()
-    {
-        Destroy(transform.parent.gameObject);
+        damageReceiver.Detuct(damage);
     }
 }

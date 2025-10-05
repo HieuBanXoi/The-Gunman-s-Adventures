@@ -13,7 +13,7 @@ public abstract class Despawn : CoreMonoBehaviour
         if (!this.CanDespawn()) return;
         DespawnObject();
     }
-    protected virtual void DespawnObject()
+    public virtual void DespawnObject()
     {
         Destroy(transform.parent.gameObject);
     }

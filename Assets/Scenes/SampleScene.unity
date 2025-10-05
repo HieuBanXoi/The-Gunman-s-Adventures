@@ -800,7 +800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 722815165}
-  - component: {fileID: 722815164}
+  - component: {fileID: 722815166}
   m_Layer: 7
   m_Name: DamageSender
   m_TagString: Untagged
@@ -808,19 +808,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &722815164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722815163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002c7be1a90476b49b24535cdd2202d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!4 &722815165
 Transform:
   m_ObjectHideFlags: 0
@@ -836,6 +823,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1321049093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &722815166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722815163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4996f15859516a438243ee7604030b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  bulletCtrl: {fileID: 1321049094}
 --- !u!1 &743021302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1152,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5996875
+  m_Radius: 0.5
   m_Center: {x: 0.050312757, y: -0.06708354, z: 0}
 --- !u!114 &868230109
 MonoBehaviour:
@@ -1162,11 +1163,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 868230106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207dab4790036ed47b81dc54761ba46a, type: 3}
+  m_Script: {fileID: 11500000, guid: 058ffccf415bf454aaa8b11c3a573de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 868230108}
   healthPoint: 100
   maxHealthPoint: 100
+  isDead: 0
+  enemyCtrl: {fileID: 1387875214}
 --- !u!1 &933894783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6354,7 +6358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4fa1b169ebdf14cb61928f60a5255e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageSender: {fileID: 722815164}
+  damageSender: {fileID: 0}
+  bulletDespawn: {fileID: 327977791}
 --- !u!1 &1387875212
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,6 +6369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387875213}
+  - component: {fileID: 1387875214}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -6388,6 +6394,19 @@ Transform:
   - {fileID: 868230107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1387875214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387875212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d685f0e54a1738f4b8ed2ce17e93b51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 860554120}
 --- !u!1 &1988506466
 GameObject:
   m_ObjectHideFlags: 0
@@ -6557,8 +6576,8 @@ SceneRoots:
   - {fileID: 435773681}
   - {fileID: 619394802}
   - {fileID: 1107677993}
+  - {fileID: 1061631728}
   - {fileID: 765623814}
   - {fileID: 743021303}
   - {fileID: 1101732642}
-  - {fileID: 1061631728}
   - {fileID: 1387875213}
