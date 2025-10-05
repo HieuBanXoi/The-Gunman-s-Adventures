@@ -73,4 +73,9 @@ public abstract class Spawner : CoreMonoBehaviour
         Debug.LogWarning("Can't find prefab with name: " + name);
         return null;
     }
+    public virtual Transform RandomPrefab()
+    {
+        int rand = Random.Range(0, this.prefabs.Count);
+        return this.prefabs[rand];
+    }
 }
