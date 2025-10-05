@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class DamageReceiver : CoreMonoBehaviour
+public abstract class DamageReceiver : CoreMonoBehaviour
 {
     [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected int healthPoint = 100;
@@ -16,6 +16,11 @@ public class DamageReceiver : CoreMonoBehaviour
     {
         base.LoadComponents();
         this.LoadCollider();
+    }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        Reborn();
     }
     protected virtual void LoadCollider()
     {
@@ -53,8 +58,5 @@ public class DamageReceiver : CoreMonoBehaviour
         this.isDead = true;
         OnDead();
     }
-    protected virtual void OnDead()
-    {
-        Debug.Log(transform.name + " is dead", gameObject);
-    }
+    protected abstract void OnDead();
 }

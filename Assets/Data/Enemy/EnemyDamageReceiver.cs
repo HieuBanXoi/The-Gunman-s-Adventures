@@ -18,7 +18,23 @@ public class EnemyDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
-        base.OnDead();
+        OnDeadFX();
         Destroy(transform.parent.gameObject);
+    }
+    protected virtual void OnDeadFX()
+    {
+        string fxName = this.GetOnDeadFXName();
+        Transform fxOnDead = FXSpawner.Instance.Spawn(fxName, transform.position, transform.rotation);
+        fxOnDead.gameObject.SetActive(true);
+    }
+    protected virtual string GetOnDeadFXName()
+    {
+        return FXSpawner.smoke1;
+    }
+    protected override void Reborn()
+    {
+        this.maxHealthPoint = this.enemyCtrl.EnemySO.maxHealthPoint;
+        Debug.Log(maxHealthPoint);
+        base.Reborn();
     }
 }
