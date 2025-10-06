@@ -20,6 +20,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         OnDeadFX();
         Destroy(transform.parent.gameObject);
+        DropManager.Instance.Drop(this.enemyCtrl.EnemySO.dropList);
     }
     protected virtual void OnDeadFX()
     {
