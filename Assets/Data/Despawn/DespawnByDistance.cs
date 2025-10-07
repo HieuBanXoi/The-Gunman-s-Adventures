@@ -1,8 +1,10 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
+
 public class DespawnByDistance : Despawn
 {
+    [Header("DespawnByDistance")]
     [SerializeField] protected float disLimit = 70f;
     [SerializeField] protected float distance = 0f;
     [SerializeField] protected Transform mainCam;
@@ -15,7 +17,9 @@ public class DespawnByDistance : Despawn
     protected virtual void LoadCamera()
     {
         if (this.mainCam != null) return;
-        this.mainCam = GameCtrl.Instance.MainCamera.transform;
+        //this.mainCam = GameCtrl.Instance.MainCamera.transform;
+        this.mainCam = FindAnyObjectByType<CinemachineCamera>().transform;
+
     }
     protected override bool CanDespawn()
     {

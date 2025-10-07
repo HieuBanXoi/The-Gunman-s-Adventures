@@ -19,8 +19,12 @@ public class EnemyDamageReceiver : DamageReceiver
     protected override void OnDead()
     {
         OnDeadFX();
+        OnDeadDrop();
         Destroy(transform.parent.gameObject);
-        DropManager.Instance.Drop(this.enemyCtrl.EnemySO.dropList);
+    }
+    protected virtual void OnDeadDrop()
+    {
+        ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropList, transform.position, transform.rotation);
     }
     protected virtual void OnDeadFX()
     {
@@ -35,7 +39,6 @@ public class EnemyDamageReceiver : DamageReceiver
     protected override void Reborn()
     {
         this.maxHealthPoint = this.enemyCtrl.EnemySO.maxHealthPoint;
-        Debug.Log(maxHealthPoint);
         base.Reborn();
     }
 }

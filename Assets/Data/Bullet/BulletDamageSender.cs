@@ -17,9 +17,9 @@ public class BulletDamageSender : DamageSender
     }
     public override void Send(DamageReceiver damageReceiver)
     {
+        DestroyBullet();
         base.Send(damageReceiver);
         Debug.Log("DestroyBullet");
-        DestroyBullet();
     }
     protected virtual void DestroyBullet()
     {
