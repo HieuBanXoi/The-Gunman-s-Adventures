@@ -4,4 +4,5 @@ public enum ItemCode
 
     IronOre = 1,
     Coin = 2,
+    Gun2 =3,
 }

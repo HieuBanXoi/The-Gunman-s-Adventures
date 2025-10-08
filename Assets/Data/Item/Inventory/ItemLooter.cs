@@ -1,23 +1,15 @@
 using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class ItemLooter : CoreMonoBehaviour
+public class ItemLooter : InventoryAbstract 
 {
-    [SerializeField] protected Inventory inventory;
     [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected new Rigidbody rigidbody;
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadInventory();
         this.LoadSphereCollider();
         this.LoadRigidbody();
-    }
-    protected virtual void LoadInventory()
-    {
-        if (this.inventory != null) return;
-        this.inventory = transform.parent.GetComponent<Inventory>();
-        Debug.Assert(this.inventory != null, "Missing Inventory", this);
     }
     protected virtual void LoadSphereCollider()
     {
@@ -40,8 +32,8 @@ public class ItemLooter : CoreMonoBehaviour
         ItemPickupable itemPickupable = other.GetComponent<ItemPickupable>();
         if (itemPickupable == null) return;
 
-        ItemCode itemCode = itemPickupable.GetItemCode();
-        if (this.inventory.AddItem(itemCode, 1))
+        ItemInventory itemInventory = itemPickupable.ItemCtrl.ItemInventory;
+        if (this.inventory.AddItem(itemInventory))
         {
             itemPickupable.Picked();
         }
