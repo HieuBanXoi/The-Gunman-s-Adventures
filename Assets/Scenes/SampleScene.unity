@@ -296,8 +296,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDespawn: {fileID: 1032992223}
   itemInventory:
-    itemProfile: {fileID: 0}
-    itemCount: 0
+    itemProfile: {fileID: 11400000, guid: 4681ed5cfe0a6c945be86beba14b07a9, type: 2}
+    itemCount: 1
     maxStack: 7
     upgradeLevel: 0
 --- !u!1 &234857025
@@ -2304,8 +2304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDespawn: {fileID: 1675117530}
   itemInventory:
-    itemProfile: {fileID: 0}
-    itemCount: 0
+    itemProfile: {fileID: 11400000, guid: eebd494554a0ff4419353a038e4aa132, type: 2}
+    itemCount: 1
     maxStack: 7
     upgradeLevel: 0
 --- !u!1 &1025681755
@@ -7728,8 +7728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDespawn: {fileID: 1374593210}
   itemInventory:
-    itemProfile: {fileID: 0}
-    itemCount: 0
+    itemProfile: {fileID: 11400000, guid: 244f026f51782e44c90bf7d3628adf54, type: 2}
+    itemCount: 1
     maxStack: 7
     upgradeLevel: 0
 --- !u!1 &1374593208
