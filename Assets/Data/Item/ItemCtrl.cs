@@ -13,6 +13,11 @@ public class ItemCtrl : CoreMonoBehaviour
         this.LoadItemDespawn();
         this.LoadItemInventory();
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.ResetItem();
+    }
 
     protected virtual void LoadItemDespawn()
     {
@@ -22,7 +27,7 @@ public class ItemCtrl : CoreMonoBehaviour
     }
     public virtual void SetItemInventory(ItemInventory itemInventory)
     {
-        this.itemInventory = itemInventory;
+        this.itemInventory = itemInventory.Clone();
     }
     protected virtual void LoadItemInventory()
     {
@@ -32,5 +37,10 @@ public class ItemCtrl : CoreMonoBehaviour
         this.itemInventory.itemProfile= itemProfile;
         this.itemInventory.itemCount = 1;
         Debug.Log(transform.name + ": LoadItemInventory", gameObject);
+    }
+    protected virtual void ResetItem()
+    {
+        itemInventory.itemCount = 1;
+        itemInventory.upgradeLevel = 0;
     }
 }

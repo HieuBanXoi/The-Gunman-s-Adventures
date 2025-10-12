@@ -6,4 +6,13 @@ public class ItemInventory
     public int itemCount = 0;
     public int maxStack = 7;
     public int upgradeLevel = 0;
+
+    public virtual ItemInventory Clone()
+    {
+        ItemInventory itemInventory = new ItemInventory();
+        itemInventory.itemProfile = this.itemProfile;
+        itemInventory.itemCount = this.itemCount;
+        itemInventory.upgradeLevel = this.upgradeLevel;
+        return itemInventory;
+    }
 }
