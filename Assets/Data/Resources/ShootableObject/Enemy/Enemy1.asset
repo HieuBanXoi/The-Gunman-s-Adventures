@@ -17,6 +17,10 @@ MonoBehaviour:
   maxHealthPoint: 100
   dropList:
   - itemSO: {fileID: 11400000, guid: 244f026f51782e44c90bf7d3628adf54, type: 2}
-    dropRate: 0
+    dropRate: 50000
+    minDrop: 0
+    maxDrop: 0
+  - itemSO: {fileID: 11400000, guid: 4681ed5cfe0a6c945be86beba14b07a9, type: 2}
+    dropRate: 100000
     minDrop: 0
     maxDrop: 0

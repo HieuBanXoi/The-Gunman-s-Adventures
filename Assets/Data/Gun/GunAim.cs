@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GunAim : MonoBehaviour
+public abstract class GunAim : CoreMonoBehaviour
 {
     [SerializeField] protected Vector3 targetPosition;
 
@@ -10,11 +10,7 @@ public class GunAim : MonoBehaviour
         this.LootAtTarget();
     }
 
-    protected virtual void GetTargetPosition()
-    {
-        this.targetPosition = InputManager.Instance.MouseWorldPos;
-        this.targetPosition.z = 0;
-    }
+    protected abstract void GetTargetPosition();
 
     protected virtual void LootAtTarget()
     {

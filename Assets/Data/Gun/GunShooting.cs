@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public abstract class GunShooting : CoreMonoBehaviour
 {
     [SerializeField] protected bool isShooting = false;
     [SerializeField] protected float shootDelay = 0.2f;
@@ -37,9 +37,5 @@ public class PlayerShooting : MonoBehaviour
         bulletCtrl.SetShotter(transform.parent);
     }
 
-    protected virtual bool IsShooting()
-    {
-        this.isShooting = InputManager.Instance.OnFiring == 1;
-        return this.isShooting;
-    }
+    protected abstract bool IsShooting();
 }

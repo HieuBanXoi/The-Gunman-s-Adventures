@@ -8,5 +8,5 @@ public class ShootableObjectSO : ScriptableObject
     public string objectName = "Shootable Object";
     public ObjectType objecttype;
     public int maxHealthPoint = 100;
-    public List<DropRate> dropList;
+    public List<ItemDropRate> dropList;
 }

@@ -10,9 +10,9 @@ public class Inventory : CoreMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        this.AddItem(ItemCode.Gun2, 1);
-        this.AddItem(ItemCode.Coin, 10);
-        this.AddItem(ItemCode.IronOre, 10);
+        //this.AddItem(ItemCode.Gun2, 1);
+        //this.AddItem(ItemCode.Coin, 10);
+        //this.AddItem(ItemCode.IronOre, 10);
     }
     public virtual bool AddItem(ItemInventory itemInventory)
     {
