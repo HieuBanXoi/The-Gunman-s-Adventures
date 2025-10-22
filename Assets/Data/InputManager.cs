@@ -18,6 +18,9 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] protected float onHorizontal;
     public float OnHorizontal { get => onHorizontal; }
+
+    [SerializeField] protected bool onSpaceDown;
+    public bool OnSpaceDown { get => onSpaceDown; }
     void Awake()
     {
         if (InputManager.instance != null) Debug.LogError("Only 1 InputManager allow to exist");
@@ -29,6 +32,7 @@ public class InputManager : MonoBehaviour
         this.GetMouseDown();
         GetHoriontal();
         GetVertical();
+        GetSpaceDown();
     }
 
     void FixedUpdate()
@@ -52,5 +56,9 @@ public class InputManager : MonoBehaviour
     protected virtual void GetMousePos()
     {
         this.mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+    protected virtual void GetSpaceDown()
+    {
+        this.onSpaceDown = Input.GetKeyDown(KeyCode.Space);
     }
 }
