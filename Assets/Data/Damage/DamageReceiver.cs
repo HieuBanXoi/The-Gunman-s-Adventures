@@ -7,7 +7,8 @@ public abstract class DamageReceiver : CoreMonoBehaviour
     [SerializeField] protected int healthPoint = 100;
     [SerializeField] protected int maxHealthPoint = 100;
     [SerializeField] protected bool isDead = false;
-
+    public int HealthPoint { get => healthPoint; }
+    public int MaxHealthPoint { get => maxHealthPoint; }
     protected override void OnEnable()
     {
         Reborn();
@@ -48,7 +49,7 @@ public abstract class DamageReceiver : CoreMonoBehaviour
         if (this.healthPoint <= 0) this.healthPoint=0;
         CheckIsDead();
     }
-    protected virtual bool IsDead()
+    public virtual bool IsDead()
     {
         return this.healthPoint <= 0;
     }

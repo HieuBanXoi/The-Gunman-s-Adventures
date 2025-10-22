@@ -10,6 +10,8 @@ public abstract class ShootableObjectCtrl : CoreMonoBehaviour
 
     [SerializeField] protected ShootableObjectSO shootableObject;
     public ShootableObjectSO ShootableObject { get => shootableObject; }
+    [SerializeField] protected DamageReceiver damageReceiver;
+    public DamageReceiver DamageReceiver => damageReceiver;
 
     protected override void LoadComponents()
     {
@@ -17,6 +19,7 @@ public abstract class ShootableObjectCtrl : CoreMonoBehaviour
         this.LoadModel();
         this.LoadDespawn();
         this.LoadSO();
+        this.LoadDamageReceiver();
     }
 
     protected virtual void LoadModel()
@@ -30,6 +33,12 @@ public abstract class ShootableObjectCtrl : CoreMonoBehaviour
         if (this.despawn != null) return;
         this.despawn = GetComponentInChildren<Despawn>();
         Debug.Log(transform.name + ": LoadDespawn", gameObject);
+    }
+    protected virtual void LoadDamageReceiver()
+    {
+        if (this.damageReceiver != null) return;
+        this.damageReceiver = transform.GetComponentInChildren<DamageReceiver>();
+        Debug.LogWarning(transform.name + ": LoadDamageReceiver", gameObject);
     }
     protected virtual void LoadSO()
     {

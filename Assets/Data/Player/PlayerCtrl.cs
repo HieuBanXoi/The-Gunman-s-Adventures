@@ -1,10 +1,11 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
-//using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerCtrl : CoreMonoBehaviour
 {
+    private static PlayerCtrl instance;
+    public static PlayerCtrl Instance { get => instance; }
     [SerializeField] protected Transform model;
     public Transform Model { get => model; }
 
@@ -12,13 +13,21 @@ public class PlayerCtrl : CoreMonoBehaviour
     public Abilities Abilities { get => abilities; }
     [SerializeField] protected PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement { get => playerMovement; }
-
+    [SerializeField] protected DamageReceiver damageReceiver;
+    public DamageReceiver DamageReceiver => damageReceiver;
+    protected override void Awake()
+    {
+        base.Awake();
+        if (PlayerCtrl.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        PlayerCtrl.instance = this;
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadModel();
         this.LoadAbilities();
         this.LoadPlayerMovement();
+        this.LoadDamageReceiver();
     }
 
     protected virtual void LoadModel()
@@ -39,6 +48,11 @@ public class PlayerCtrl : CoreMonoBehaviour
         this.abilities = GetComponentInChildren<Abilities>();
         Debug.Log(transform.name + ": LoadAbilities", gameObject);
     }
-
+    protected virtual void LoadDamageReceiver()
+    {
+        if (this.damageReceiver != null) return;
+        this.damageReceiver = transform.GetComponentInChildren<DamageReceiver>();
+        Debug.LogWarning(transform.name + ": LoadDamageReceiver", gameObject);
+    }
 }
     
