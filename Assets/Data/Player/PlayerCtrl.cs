@@ -13,8 +13,12 @@ public class PlayerCtrl : CoreMonoBehaviour
     public Abilities Abilities { get => abilities; }
     [SerializeField] protected PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement { get => playerMovement; }
+
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;
+
+    [SerializeField] protected Inventory inventory;
+    public Inventory Inventory => inventory;
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +32,7 @@ public class PlayerCtrl : CoreMonoBehaviour
         this.LoadAbilities();
         this.LoadPlayerMovement();
         this.LoadDamageReceiver();
+        this.LoadInventory();
     }
 
     protected virtual void LoadModel()
@@ -53,6 +58,12 @@ public class PlayerCtrl : CoreMonoBehaviour
         if (this.damageReceiver != null) return;
         this.damageReceiver = transform.GetComponentInChildren<DamageReceiver>();
         Debug.LogWarning(transform.name + ": LoadDamageReceiver", gameObject);
+    }
+    protected virtual void LoadInventory()
+    {
+        if (this.inventory != null) return;
+        this.inventory = GetComponentInChildren<Inventory>();
+        Debug.LogWarning(transform.name + ": LoadInventory", gameObject);
     }
 }
     

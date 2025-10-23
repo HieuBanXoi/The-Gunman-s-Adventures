@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public abstract class BaseButton : CoreMonoBehaviour
 {
-    [Header("Base Button)")]
+    [Header("Base Button")]
     [SerializeField] protected Button button;
 
     protected override void LoadComponents()

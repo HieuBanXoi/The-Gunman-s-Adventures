@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Shootable Object
   objecttype: 1
-  maxHealthPoint: 100
+  maxHealthPoint: 10
   dropList:
   - itemSO: {fileID: 11400000, guid: 244f026f51782e44c90bf7d3628adf54, type: 2}
     dropRate: 50000
