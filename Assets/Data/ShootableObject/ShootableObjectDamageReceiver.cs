@@ -4,6 +4,7 @@ public class ShootableObjectDamageReceiver : DamageReceiver
 {
     [Header("Shootable Object")]
     [SerializeField] protected ShootableObjectCtrl shootableObjectCtrl;
+    [SerializeField] protected bool isShowHpBar = false;
 
     protected override void LoadComponents()
     {
@@ -40,5 +41,12 @@ public class ShootableObjectDamageReceiver : DamageReceiver
     {
         this.maxHealthPoint = this.shootableObjectCtrl.ShootableObject.maxHealthPoint;
         base.Reborn();
+    }
+    public override void Detuct(int value)
+    {
+        base.Detuct(value);
+        if (isShowHpBar) return;
+        EnemySpawner.Instance.AddHPBar2Obj(transform.parent);
+        isShowHpBar = true;
     }
 }

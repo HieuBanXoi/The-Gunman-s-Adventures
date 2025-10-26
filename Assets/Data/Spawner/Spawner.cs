@@ -52,6 +52,8 @@ public abstract class Spawner : CoreMonoBehaviour
     }
     public virtual void Despawn(Transform obj)
     {
+        if (this.poolObjs.Contains(obj)) return;
+
         obj.gameObject.SetActive(false);
         this.poolObjs.Add(obj);
     }

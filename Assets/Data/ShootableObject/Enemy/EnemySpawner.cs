@@ -17,7 +17,7 @@ public class EnemySpawner : Spawner
         AddHPBar2Obj(newEnemy);
         return newEnemy;
     }
-    protected virtual void AddHPBar2Obj(Transform newEnemy)
+    public virtual void AddHPBar2Obj(Transform newEnemy)
     {
         Transform newHPBar = HPBarSpawner.Instance.Spawn(HPBarSpawner.HPBar, newEnemy.position, Quaternion.identity);
         HPbar hpBar = newHPBar.GetComponent<HPbar>();
