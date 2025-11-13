@@ -8,12 +8,12 @@ public abstract class GunShooting : CoreMonoBehaviour
     [SerializeField] protected float shootDelay = 0.2f;
     [SerializeField] protected float shootTimer = 0f;
     //[SerializeField] protected Transform bulletPrefab;
-    void Update()
+    protected virtual void Update()
     {
         this.IsShooting();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         this.Shooting();
     }

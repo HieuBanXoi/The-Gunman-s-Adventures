@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class ItemPickupable : ItemAbstract
 {
     [Header("Item Pickupable")]
-    [SerializeField] protected SphereCollider sphereCollider;
+    [SerializeField] protected CircleCollider2D circleCollider;
     public static ItemCode String2ItemCode(string itemName)
     {
         try
@@ -24,11 +24,11 @@ public class ItemPickupable : ItemAbstract
     }
     protected virtual void LoadSphereCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        Debug.Assert(this.sphereCollider != null, "Missing SphereCollider", this);
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.3f;
+        if (this.circleCollider != null) return;
+        this.circleCollider = GetComponent<CircleCollider2D>();
+        Debug.Assert(this.circleCollider != null, "Missing SphereCollider", this);
+        this.circleCollider.isTrigger = true;
+        this.circleCollider.radius = 0.3f;
     }
     public virtual ItemCode GetItemCode()
     {

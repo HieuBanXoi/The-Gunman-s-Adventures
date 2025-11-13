@@ -1,12 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class BulletImpart : BulletAbstract
 {
     [Header("Bullet Impart")]
-    [SerializeField] protected SphereCollider sphereCollider;
-    [SerializeField] protected Rigidbody _rigidbody;
+    [SerializeField] protected CircleCollider2D circleCollider;
+    [SerializeField] protected Rigidbody2D _rigidbody;
 
     protected override void LoadComponents()
     {
@@ -17,35 +17,30 @@ public class BulletImpart : BulletAbstract
 
     protected virtual void LoadCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.05f;
+        if (this.circleCollider != null) return;
+        this.circleCollider = GetComponent<CircleCollider2D>();
+        this.circleCollider.isTrigger = true;
+        this.circleCollider.radius = 0.05f;
         Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
 
     protected virtual void LoadRigibody()
     {
         if (this._rigidbody != null) return;
-        this._rigidbody = GetComponent<Rigidbody>();
-        this._rigidbody.isKinematic = true;
+        this._rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         Debug.Log(transform.name + ": LoadRigibody", gameObject);
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
+        {
+            this.bulletCtrl.BulletDespawn.DespawnObject();
+            this.bulletCtrl.DamageSender.CreateImpactFX();
+        }
         this.bulletCtrl.DamageSender.Send(other.transform);
-        //CreateImpactFX();
     }
-    //protected virtual void CreateImpactFX()
-    //{
-    //    string fxName = GetImpactFX();
+    
 
-    //    Transform fxImpact = FXSpawner.Instance.Spawn(fxName, transform.position, transform.rotation);
-    //    fxImpact.gameObject.SetActive(true);
-    //}
-    //protected virtual string GetImpactFX()
-    //{
-    //    return FXSpawner.impact1;
-    //}
 }

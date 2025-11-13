@@ -15,7 +15,7 @@ public class DamageSender : CoreMonoBehaviour
         if (damageReceiver == null) return;
         damageReceiver.Detuct(damage);
     }
-    protected virtual void CreateImpactFX()
+    public virtual void CreateImpactFX()
     {
         string fxName = GetImpactFX();
 

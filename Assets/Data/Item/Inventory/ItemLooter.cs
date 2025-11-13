@@ -1,10 +1,10 @@
 using UnityEngine;
-[RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class ItemLooter : InventoryAbstract 
 {
-    [SerializeField] protected SphereCollider sphereCollider;
-    [SerializeField] protected new Rigidbody rigidbody;
+    [SerializeField] protected CircleCollider2D circleCollider;
+    [SerializeField] protected new Rigidbody2D rigidbody;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -13,21 +13,21 @@ public class ItemLooter : InventoryAbstract
     }
     protected virtual void LoadSphereCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        Debug.Assert(this.sphereCollider != null, "Missing SphereCollider", this);
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.5f;
+        if (this.circleCollider != null) return;
+        this.circleCollider = GetComponent<CircleCollider2D>();
+        Debug.Assert(this.circleCollider != null, "Missing SphereCollider", this);
+        this.circleCollider.isTrigger = true;
+        this.circleCollider.radius = 0.5f;
     }
     protected virtual void LoadRigidbody()
     {
         if (this.rigidbody != null) return;
-        this.rigidbody = GetComponent<Rigidbody>();
+        this.rigidbody = GetComponent<Rigidbody2D>();
         Debug.Assert(this.rigidbody != null, "Missing Rigidbody", this);
-        this.rigidbody.isKinematic = true;
-        this.rigidbody.useGravity = false;
+        this.rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        this.rigidbody.gravityScale = 0;
     }
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         ItemPickupable itemPickupable = other.GetComponent<ItemPickupable>();
         if (itemPickupable == null) return;

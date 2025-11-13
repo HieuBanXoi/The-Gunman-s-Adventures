@@ -7,4 +7,8 @@ public class GunAimByMouse : GunAim
         this.targetPosition = InputManager.Instance.MouseWorldPos;
         this.targetPosition.z = 0;
     }
+    protected override bool IsAiming()
+    {
+        return true;
+    }
 }

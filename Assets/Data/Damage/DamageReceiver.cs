@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CircleCollider2D))]
 public abstract class DamageReceiver : CoreMonoBehaviour
 {
-    [SerializeField] protected SphereCollider sphereCollider;
+    [SerializeField] protected CircleCollider2D circleCollider;
     [SerializeField] protected int healthPoint = 100;
     [SerializeField] protected int maxHealthPoint = 100;
     [SerializeField] protected bool isDead = false;
@@ -25,10 +25,10 @@ public abstract class DamageReceiver : CoreMonoBehaviour
     }
     protected virtual void LoadCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.5f;
+        if (this.circleCollider != null) return;
+        this.circleCollider = GetComponent<CircleCollider2D>();
+        //this.circleCollider.isTrigger = true;
+        this.circleCollider.radius = 0.5f;
         Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected virtual void Reborn()

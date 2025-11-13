@@ -6,7 +6,7 @@ public class FollowTarget : CoreMonoBehaviour
 {
 
     [SerializeField] protected Transform target;
-    [SerializeField] protected float speed = 2f;
+    [SerializeField] protected float speed = 5f;
 
     protected virtual void FixedUpdate()
     {
