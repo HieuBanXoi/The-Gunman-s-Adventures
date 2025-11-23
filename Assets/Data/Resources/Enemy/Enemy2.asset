@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a39c44cdbdbb84987073d489649069, type: 3}
+  m_Name: Enemy2
+  m_EditorClassIdentifier: 
+  objectName: Enemy1
+  maxHealthPoint: 100
+  dropList:
+  - itemSO: {fileID: 11400000, guid: 4681ed5cfe0a6c945be86beba14b07a9, type: 2}
+    minDrop: 2
+    maxDrop: 5
+  - itemSO: {fileID: 11400000, guid: 244f026f51782e44c90bf7d3628adf54, type: 2}
+    minDrop: 3
+    maxDrop: 4

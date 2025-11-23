@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
@@ -9,6 +11,7 @@ public abstract class DamageReceiver : CoreMonoBehaviour
     [SerializeField] protected bool isDead = false;
     public int HealthPoint { get => healthPoint; }
     public int MaxHealthPoint { get => maxHealthPoint; }
+    [SerializeField] protected List<IDamageReceiveObserver> observers = new List<IDamageReceiveObserver>();
     protected override void OnEnable()
     {
         Reborn();
@@ -47,6 +50,7 @@ public abstract class DamageReceiver : CoreMonoBehaviour
         if (this.isDead) return;
         this.healthPoint -= value;
         if (this.healthPoint <= 0) this.healthPoint=0;
+        this.OnHpChanged();
         CheckIsDead();
     }
     public virtual bool IsDead()
@@ -58,6 +62,17 @@ public abstract class DamageReceiver : CoreMonoBehaviour
         if (!IsDead()) return;
         this.isDead = true;
         OnDead();
+    }
+    public virtual void ObserverAdd(IDamageReceiveObserver observer)
+    {
+        this.observers.Add(observer);
+    }
+    protected virtual void OnHpChanged()
+    {
+        foreach (IDamageReceiveObserver observer in observers)
+        {
+            observer.OnHPChanged();
+        }
     }
     protected abstract void OnDead();
 }

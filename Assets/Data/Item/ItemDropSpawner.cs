@@ -6,8 +6,6 @@ public class ItemDropSpawner : Spawner
     private static ItemDropSpawner instance;
     public static ItemDropSpawner Instance => instance;
 
-    [SerializeField] protected float gameDropRate = 1;
-
     protected override void Awake()
     {
         base.Awake();
@@ -15,66 +13,20 @@ public class ItemDropSpawner : Spawner
         ItemDropSpawner.instance = this;
     }
 
-    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList, Vector3 pos, Quaternion rot)
+    public virtual void Drop(List<ItemDropRate> dropList, Vector3 pos, Quaternion rot)
     {
-        List<ItemDropRate> dropItems = new List<ItemDropRate>();
-        if (dropList.Count <1) return dropItems;
-
-        dropItems = DropItems(dropList);
-        foreach(ItemDropRate itemDropRate in dropItems)
+        float offset = 0.7f;
+        foreach (ItemDropRate itemDropRate in dropList)
         {
             ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            Transform itemDrop = this.Spawn(itemCode.ToString(), pos, rot);
-            if (itemDrop == null) continue;
-            itemDrop.gameObject.SetActive(true);
-        }
-        return dropItems;
-        
-    }
-    protected virtual List<ItemDropRate> DropItems(List<ItemDropRate> items)
-    {
-        List<ItemDropRate> droppedItems = new List<ItemDropRate>();
-
-        float rate, itemRate;
-        int itemDropMore;
-        foreach (ItemDropRate item in items)
-        {
-            rate = Random.Range(0, 1f);
-            itemRate = item.dropRate / 100000f * this.GameDropRate();
-            itemDropMore = Mathf.FloorToInt(itemRate);
-
-            if (itemDropMore > 0)
+            int itemDropNum = Mathf.FloorToInt(Random.Range(itemDropRate.minDrop, itemDropRate.maxDrop+1));
+            for (int i = 0; i < itemDropNum; i++)
             {
-                itemRate -= itemDropMore;
-                for (int i = 0; i < itemDropMore; i++)
-                {
-                    droppedItems.Add(item);
-                }
+                Transform itemDrop = this.Spawn(itemCode.ToString(), pos, rot);
+                if (itemDrop == null) continue;
+                itemDrop.gameObject.SetActive(true);
             }
-
-            if (rate <= itemRate)
-            {
-                droppedItems.Add(item);
-            }
+            pos += new Vector3(offset, 0, 0);
         }
-
-        return droppedItems;
-    }
-
-    protected virtual float GameDropRate()
-    {
-        float dropRateFromItems = 0f;
-
-        return this.gameDropRate + dropRateFromItems;
-    }
-    public virtual Transform DropFormInventory(ItemInventory itemInventory, Vector3 pos, Quaternion rot)
-    {
-        ItemCode itemCode = itemInventory.itemProfile.itemCode;
-        Transform itemDrop = this.Spawn(itemCode.ToString(), pos, rot);
-        if (itemDrop == null) return null;
-        itemDrop.gameObject.SetActive(true);
-        ItemCtrl itemCtrl = itemDrop.GetComponent<ItemCtrl>();
-        itemCtrl.SetItemInventory(itemInventory);
-        return itemDrop;
-    }
+    } 
 }

@@ -4,13 +4,13 @@ public class GunAimByTarget : GunAim
 {
     [Header("Aim By Target")]
     [SerializeField] private Transform target;
-    [SerializeField] private float aimDistance = 5f;
+    [SerializeField] private float aimDistance = 10f;
 
-    //protected override void LoadComponents()
-    //{
-    //    base.LoadComponents();
-    //    this.SetTarget();
-    //}
+    protected override void Start()
+    {
+        base.Start();
+        this.SetTarget();
+    }
     protected virtual void SetTarget()
     {
         this.target = PlayerCtrl.Instance.transform;

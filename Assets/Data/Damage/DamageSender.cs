@@ -26,4 +26,8 @@ public class DamageSender : CoreMonoBehaviour
     {
         return FXSpawner.impact1;
     }
+    public virtual void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
 }

@@ -4,8 +4,13 @@ public class ShootByDistance : GunShooting
 {
     [Header("Shoot By Distance")]
     [SerializeField] private Transform target;
-    [SerializeField] private float shootDistance = 5f;
+    [SerializeField] private float shootDistance = 10f;
 
+    protected override void Start()
+    {
+        base.Start();
+        this.target = PlayerCtrl.Instance.transform;
+    }
     public virtual void SetTarget(Transform target)
     {
         this.target = target;

@@ -31,6 +31,7 @@ public class PlayerMovement : CoreMonoBehaviour
     private void FixedUpdate()
     {
         this.Moving();
+        this.UpdateAnimation();
     }
 
     protected virtual void Moving()
@@ -39,6 +40,18 @@ public class PlayerMovement : CoreMonoBehaviour
         moveInput.y = InputManager.Instance.OnVertical;
         moveInput = moveInput.normalized;
         transform.parent.position += moveInput * (moveSpeed * Time.fixedDeltaTime);
+    }
+    protected virtual void UpdateAnimation()
+    {
+        Animator animator = playerCtrl.Model.GetComponent<Animator>();
+        if (animator == null) return;
+        bool isMoving = moveInput.magnitude > 0;
+        animator.SetBool("isMoving", isMoving);
+        if (isMoving)
+        {
+            animator.SetFloat("moveX", moveInput.x);
+            animator.SetFloat("moveY", moveInput.y);
+        }
     }
     public virtual void BoostSpeed(float newMoveSpeed)
     {

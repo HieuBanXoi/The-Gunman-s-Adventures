@@ -9,16 +9,14 @@ public class PlayerCtrl : CoreMonoBehaviour
     [SerializeField] protected Transform model;
     public Transform Model { get => model; }
 
-    [SerializeField] protected Abilities abilities;
-    public Abilities Abilities { get => abilities; }
     [SerializeField] protected PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement { get => playerMovement; }
 
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;
+    [SerializeField] protected PlayerWeaponHandler playerWeaponHandler;
+    public PlayerWeaponHandler PlayerWeaponHandler => playerWeaponHandler;
 
-    [SerializeField] protected Inventory inventory;
-    public Inventory Inventory => inventory;
     protected override void Awake()
     {
         base.Awake();
@@ -29,10 +27,9 @@ public class PlayerCtrl : CoreMonoBehaviour
     {
         base.LoadComponents();
         this.LoadModel();
-        this.LoadAbilities();
         this.LoadPlayerMovement();
         this.LoadDamageReceiver();
-        this.LoadInventory();
+        this.LoadPlayerWeaponHandler();
     }
 
     protected virtual void LoadModel()
@@ -47,23 +44,17 @@ public class PlayerCtrl : CoreMonoBehaviour
         this.playerMovement = GetComponentInChildren<PlayerMovement>();
         Debug.Log(transform.name + ": LoadPlayerMovement", gameObject);
     }
-    protected virtual void LoadAbilities()
-    {
-        if (this.abilities != null) return;
-        this.abilities = GetComponentInChildren<Abilities>();
-        Debug.Log(transform.name + ": LoadAbilities", gameObject);
-    }
     protected virtual void LoadDamageReceiver()
     {
         if (this.damageReceiver != null) return;
         this.damageReceiver = transform.GetComponentInChildren<DamageReceiver>();
         Debug.LogWarning(transform.name + ": LoadDamageReceiver", gameObject);
     }
-    protected virtual void LoadInventory()
+    protected virtual void LoadPlayerWeaponHandler()
     {
-        if (this.inventory != null) return;
-        this.inventory = GetComponentInChildren<Inventory>();
-        Debug.LogWarning(transform.name + ": LoadInventory", gameObject);
+        if (this.playerWeaponHandler != null) return;
+        this.playerWeaponHandler = transform.GetComponentInChildren<PlayerWeaponHandler>();
+        Debug.LogWarning(transform.name + ": LoadPlayerWeaponHandler", gameObject);
     }
 }
     

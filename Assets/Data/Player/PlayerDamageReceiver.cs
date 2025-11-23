@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerDamageReceiver : DamageReceiver
 {
     [Header("PlayerDamageReceiver")]
+    
     [SerializeField] protected PlayerCtrl playerCtrl;
 
     protected override void LoadComponents()
@@ -18,11 +19,12 @@ public class PlayerDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
-        //OnDeadFX();
-        //OnDeadDrop();
-        //shootableObjectCtrl.Despawn.DespawnObject();
+        this.playerCtrl.gameObject.SetActive(false);
+        foreach (IDamageReceiveObserver observer in observers)
+        {
+            observer.IsDead();
+        }
     }
-    
     protected virtual void OnDeadFX()
     {
         string fxName = this.GetOnDeadFXName();
@@ -33,9 +35,4 @@ public class PlayerDamageReceiver : DamageReceiver
     {
         return FXSpawner.smoke1;
     }
-    //protected override void Reborn()
-    //{
-    //    this.maxHealthPoint = this.shootableObjectCtrl.ShootableObject.maxHealthPoint;
-    //    base.Reborn();
-    //}
 }
