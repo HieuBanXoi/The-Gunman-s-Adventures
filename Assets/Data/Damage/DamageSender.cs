@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageSender : CoreMonoBehaviour
 {
-    [SerializeField] protected int damage = 10;
+    [SerializeField] protected int damage = 1;
     public virtual void Send(Transform obj)
         {
             DamageReceiver damageReceiver = obj.GetComponentInChildren<DamageReceiver>();
@@ -15,7 +15,7 @@ public class DamageSender : CoreMonoBehaviour
         if (damageReceiver == null) return;
         damageReceiver.Detuct(damage);
     }
-    protected virtual void CreateImpactFX()
+    public virtual void CreateImpactFX()
     {
         string fxName = GetImpactFX();
 
@@ -25,5 +25,9 @@ public class DamageSender : CoreMonoBehaviour
     protected virtual string GetImpactFX()
     {
         return FXSpawner.impact1;
+    }
+    public virtual void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 }

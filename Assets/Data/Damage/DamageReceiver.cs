@@ -1,13 +1,17 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CircleCollider2D))]
 public abstract class DamageReceiver : CoreMonoBehaviour
 {
-    [SerializeField] protected SphereCollider sphereCollider;
+    [SerializeField] protected CircleCollider2D circleCollider;
     [SerializeField] protected int healthPoint = 100;
     [SerializeField] protected int maxHealthPoint = 100;
     [SerializeField] protected bool isDead = false;
-
+    public int HealthPoint { get => healthPoint; }
+    public int MaxHealthPoint { get => maxHealthPoint; }
+    [SerializeField] protected List<IDamageReceiveObserver> observers = new List<IDamageReceiveObserver>();
     protected override void OnEnable()
     {
         Reborn();
@@ -24,10 +28,10 @@ public abstract class DamageReceiver : CoreMonoBehaviour
     }
     protected virtual void LoadCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.5f;
+        if (this.circleCollider != null) return;
+        this.circleCollider = GetComponent<CircleCollider2D>();
+        //this.circleCollider.isTrigger = true;
+        this.circleCollider.radius = 0.5f;
         Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected virtual void Reborn()
@@ -46,9 +50,10 @@ public abstract class DamageReceiver : CoreMonoBehaviour
         if (this.isDead) return;
         this.healthPoint -= value;
         if (this.healthPoint <= 0) this.healthPoint=0;
+        this.OnHpChanged();
         CheckIsDead();
     }
-    protected virtual bool IsDead()
+    public virtual bool IsDead()
     {
         return this.healthPoint <= 0;
     }
@@ -57,6 +62,17 @@ public abstract class DamageReceiver : CoreMonoBehaviour
         if (!IsDead()) return;
         this.isDead = true;
         OnDead();
+    }
+    public virtual void ObserverAdd(IDamageReceiveObserver observer)
+    {
+        this.observers.Add(observer);
+    }
+    protected virtual void OnHpChanged()
+    {
+        foreach (IDamageReceiveObserver observer in observers)
+        {
+            observer.OnHPChanged();
+        }
     }
     protected abstract void OnDead();
 }

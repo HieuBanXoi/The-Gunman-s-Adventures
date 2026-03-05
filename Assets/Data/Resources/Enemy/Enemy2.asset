@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb68ae8153f32c74cb6516ae78d84960, type: 3}
+  m_Script: {fileID: 11500000, guid: f9a39c44cdbdbb84987073d489649069, type: 3}
   m_Name: Enemy2
   m_EditorClassIdentifier: 
-  enemyName: Enemy2
-  maxHealthPoint: 30
+  objectName: Enemy1
+  maxHealthPoint: 100
   dropList:
   - itemSO: {fileID: 11400000, guid: 4681ed5cfe0a6c945be86beba14b07a9, type: 2}
-    dropRate: 0
-    minDrop: 0
-    maxDrop: 0
+    minDrop: 2
+    maxDrop: 5
+  - itemSO: {fileID: 11400000, guid: 244f026f51782e44c90bf7d3628adf54, type: 2}
+    minDrop: 3
+    maxDrop: 4

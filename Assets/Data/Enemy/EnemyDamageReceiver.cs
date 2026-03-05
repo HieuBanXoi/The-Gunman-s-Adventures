@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class EnemyDamageReceiver : DamageReceiver
 {
-    [Header("EnemyDamageReceiver")]
+    [Header("Shootable Object")]
     [SerializeField] protected EnemyCtrl enemyCtrl;
+    [SerializeField] protected bool isShowHpBar = false;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadEnemyCtrl();
+        this.LoadCtrl();
     }
-    protected virtual void LoadEnemyCtrl()
+    protected virtual void LoadCtrl()
     {
         if (this.enemyCtrl != null) return;
         this.enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
@@ -18,27 +19,29 @@ public class EnemyDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
-        OnDeadFX();
+        enemyCtrl.WeaponHandler.gameObject.SetActive(false);
+        enemyCtrl.DissolveEffect.StartDissolve();
+        Invoke(nameof(DestroyAfterEffect), enemyCtrl.DissolveEffect.dissolveDuration);
+    }
+    protected virtual void DestroyAfterEffect()
+    {
         OnDeadDrop();
-        Destroy(transform.parent.gameObject);
+        Destroy(enemyCtrl.transform.parent.gameObject);
     }
     protected virtual void OnDeadDrop()
     {
         ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropList, transform.position, transform.rotation);
     }
-    protected virtual void OnDeadFX()
-    {
-        string fxName = this.GetOnDeadFXName();
-        Transform fxOnDead = FXSpawner.Instance.Spawn(fxName, transform.position, transform.rotation);
-        fxOnDead.gameObject.SetActive(true);
-    }
-    protected virtual string GetOnDeadFXName()
-    {
-        return FXSpawner.smoke1;
-    }
     protected override void Reborn()
     {
         this.maxHealthPoint = this.enemyCtrl.EnemySO.maxHealthPoint;
         base.Reborn();
+    }
+    public override void Detuct(int value)
+    {
+        base.Detuct(value);
+        if (isShowHpBar) return;
+        enemyCtrl.AddHPBar2Obj(transform.parent);
+        isShowHpBar = true;
     }
 }

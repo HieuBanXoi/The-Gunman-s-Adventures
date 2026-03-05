@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "235223186848",
+    "firebase_url": "https://the-gunman-s-adventures-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "the-gunman-s-adventures",
+    "storage_bucket": "the-gunman-s-adventures.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235223186848:android:9d0e1e8102c68dad3d78c5",
+        "android_client_info": {
+          "package_name": "com.HieuBanXoi.TheGunmansAdventures"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqLJXXpOlnx7eupp3A73gF6zzZD0Xll8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

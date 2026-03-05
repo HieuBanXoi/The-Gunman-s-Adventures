@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class GunAim : MonoBehaviour
+public abstract class GunAim : CoreMonoBehaviour
 {
     [SerializeField] protected Vector3 targetPosition;
-
+    [SerializeField] protected bool isAiming=false;
+    protected virtual void Update()
+    {
+        this.IsAiming();
+    }
     void FixedUpdate()
     {
         this.GetTargetPosition();
         this.LootAtTarget();
     }
 
-    protected virtual void GetTargetPosition()
-    {
-        this.targetPosition = InputManager.Instance.MouseWorldPos;
-        this.targetPosition.z = 0;
-    }
+    protected abstract void GetTargetPosition();
 
     protected virtual void LootAtTarget()
     {
+        if (!this.IsAiming()) return;
         Vector3 diff = this.targetPosition - transform.parent.position;
         diff.Normalize();
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
@@ -31,4 +32,5 @@ public class GunAim : MonoBehaviour
             transform.parent.localScale = new Vector3(1, 1, 1);
         }
     }
+    protected abstract bool IsAiming();
 }

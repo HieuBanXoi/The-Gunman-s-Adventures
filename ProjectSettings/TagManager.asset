@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -44,11 +46,17 @@ TagManager:
   - name: Ground
     uniqueID: 899880741
     locked: 0
-  - name: Obstacle
-    uniqueID: 2196665261
+  - name: Wall
+    uniqueID: 3475450891
     locked: 0
-  - name: Player
+  - name: Decor1
+    uniqueID: 1343058069
+    locked: 0
+  - name: Character
     uniqueID: 2722313531
+    locked: 0
+  - name: Decor2
+    uniqueID: 2196665261
     locked: 0
   - name: Gun
     uniqueID: 2629268525

@@ -39,6 +39,11 @@ public abstract class Spawner : CoreMonoBehaviour
         Transform prefab = GetPrefabByName(prefabName);
         if(prefab == null) return null;
 
+        
+        return this.Spawn(prefab, position, rotation);
+    }
+    public virtual Transform Spawn(Transform prefab, Vector3 position, Quaternion rotation)
+    {
         Transform newPrefab = GetObjectFromPool(prefab);
         newPrefab.SetPositionAndRotation(position, rotation);
 
@@ -47,6 +52,8 @@ public abstract class Spawner : CoreMonoBehaviour
     }
     public virtual void Despawn(Transform obj)
     {
+        if (this.poolObjs.Contains(obj)) return;
+
         obj.gameObject.SetActive(false);
         this.poolObjs.Add(obj);
     }
